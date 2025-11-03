@@ -1,0 +1,13 @@
+---
+- name: Setup Squid Proxy on localhost
+  hosts: localhost
+  become: true
+
+  roles:
+    - squid
+
+  handlers:
+    - name: Restart Squid
+      ansible.builtin.service:
+        name: squid
+        state: restarted
