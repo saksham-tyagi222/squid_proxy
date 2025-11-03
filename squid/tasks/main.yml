@@ -1,0 +1,20 @@
+---
+- name: Install Squid package
+  ansible.builtin.package:
+    name: squid
+    state: present
+
+- name: Copy squid.conf file
+  ansible.builtin.copy:
+    src: squid.conf
+    dest: /etc/squid/squid.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Squid
+
+- name: Enable and start squid service
+  ansible.builtin.service:
+    name: squid
+    state: started
+    enabled: yes
